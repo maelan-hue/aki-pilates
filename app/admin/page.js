@@ -132,8 +132,25 @@ export default function AdminPage() {
   }
 
   async function updateBookingStatus(id, status) {
+    const booking = bookings.find((b) => b.id === id);
+    const prevStatus = booking?.status || 'nouveau';
+
     await supabase.from('bookings').update({ status }).eq('id', id);
     setBookings((prev) => prev.map((b) => b.id === id ? { ...b, status } : b));
+
+    if (!booking?.class_id) return;
+    const cls = classes.find((c) => c.id === booking.class_id);
+    if (!cls) return;
+
+    let delta = 0;
+    if (status === 'confirme' && prevStatus !== 'confirme') delta = -1;
+    else if (prevStatus === 'confirme' && status !== 'confirme') delta = +1;
+
+    if (delta !== 0) {
+      const newPlaces = Math.max(0, cls.places + delta);
+      await supabase.from('classes').update({ places: newPlaces }).eq('id', booking.class_id);
+      setClasses((prev) => prev.map((c) => c.id === booking.class_id ? { ...c, places: newPlaces } : c));
+    }
   }
 
   // ---------- RENDER ----------
