@@ -128,11 +128,14 @@ export default function HomePage() {
 
         {classes.filter((c) => !selectedDay || c.class_date === selectedDay).map((c) => {
           const full = c.places <= 0;
-          let tag;
-          if (full) tag = <span className="tag">Complet</span>;
-          else if (c.is_formule) tag = <span className="tag low">Formule</span>;
-          else if (c.places <= 2) tag = <span className="tag low">{c.places} place{c.places > 1 ? 's' : ''} restante{c.places > 1 ? 's' : ''}</span>;
-          else tag = <span className="tag">{c.places} places restantes</span>;
+          const placesTag = full
+            ? <span className="tag">Complet</span>
+            : c.places <= 2
+              ? <span className="tag low">{c.places} place{c.places > 1 ? 's' : ''} restante{c.places > 1 ? 's' : ''}</span>
+              : <span className="tag">{c.places} places restantes</span>;
+          const tag = c.is_formule
+            ? <>{placesTag}<span className="tag low">Formule petit-déj</span></>
+            : placesTag;
 
           return (
             <div className="class-card" key={c.id}>
