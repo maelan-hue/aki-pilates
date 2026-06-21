@@ -166,15 +166,7 @@
   .admin-item .ai-info span{font-size:11px;color:var(--ink-soft);}
   .admin-item .ai-price{font-size:12.5px;color:var(--sage-deep);font-family:'Fraunces',serif;}
   .del-btn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--stone);border:none;color:var(--clay-deep);font-size:13px;cursor:pointer;}
-  .edit-btn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--stone);border:none;color:var(--sage-deep);font-size:14px;cursor:pointer;}
-  .admin-item--editing{border-color:var(--sage-deep);background:#f7f2ec;}
-  .edit-actions{display:flex;gap:10px;}
-  .cancel-btn{flex:1;padding:13px;border-radius:12px;border:1px solid var(--line);background:transparent;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--ink-soft);cursor:pointer;}
   .empty-state{font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px 0;}
-  .status-select{flex:0 0 auto;border:none;border-radius:999px;padding:5px 10px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;cursor:pointer;outline:none;appearance:none;text-align:center;}
-  .status-nouveau{background:#F0E8DC;color:#7A6A56;}
-  .status-acompte{background:#E8F0DC;color:#4A7A2A;}
-  .status-confirme{background:#DCF0E8;color:#2A7A5A;}
 
 html{margin:0;padding:0;}
 a{color:inherit;}
@@ -186,3 +178,34 @@ button{font-family:inherit;}
 .login-box p{font-size:13px;color:var(--ink-soft);margin-bottom:20px;}
 .login-error{color:var(--clay-deep);font-size:12px;margin-top:10px;}
 .loading-state{text-align:center;padding:60px 20px;color:var(--ink-soft);font-size:13px;}
+
+/* ---------- BOOKING STATUS ---------- */
+.booking-item{display:block;}
+.booking-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.status-badge{font-size:10px;padding:4px 9px;border-radius:999px;white-space:nowrap;letter-spacing:0.02em;}
+.status-nouveau{background:#EFE2D2;color:var(--ink-soft);}
+.status-acompte_paye{background:#E9D9A8;color:#7A5E1C;}
+.status-confirme{background:#D9E5CC;color:#42622B;}
+.status-actions{display:flex;gap:6px;margin-top:10px;}
+.status-btn{flex:1;font-size:10.5px;padding:7px 4px;border-radius:8px;border:1px solid var(--line);background:var(--cream);color:var(--ink-soft);cursor:pointer;}
+.status-btn.is-active{border-color:var(--clay-deep);color:var(--clay-deep);background:#FBEFEA;font-weight:500;}
+
+/* ---------- MONTH CALENDAR ---------- */
+.mcal{background:var(--stone);border-radius:20px;padding:16px 14px;margin:0 22px 24px;}
+.mcal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.mcal-head .mcal-month{font-family:'Fraunces',serif;font-size:15px;}
+.mcal-nav{width:26px;height:26px;border-radius:50%;border:none;background:var(--cream);color:var(--ink);font-size:13px;cursor:pointer;}
+.mcal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;}
+.mcal-weekdays span{text-align:center;font-size:9.5px;color:var(--ink-soft);padding:2px 0;}
+.mcal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.mcal-cell{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink);border:1px solid transparent;background:none;font-family:inherit;}
+.mcal-cell.is-today{border-color:var(--clay);}
+.mcal-cell.is-selected{background:var(--cream);border-color:var(--clay-deep);}
+.mcal-cell.is-empty{cursor:default;}
+.mcal-dots{display:flex;gap:2px;margin-top:2px;height:5px;}
+.mcal-dot{width:4px;height:4px;border-radius:50%;display:inline-block;}
+.mcal-dot.cours{background:var(--clay-deep);}
+.mcal-dot.formule{background:var(--sage-deep);}
+.mcal-legend{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:10.5px;color:var(--ink-soft);}
+.mcal-legend span{display:flex;align-items:center;gap:5px;}
+.mcal-detail{margin-top:10px;font-size:11.5px;color:var(--clay-deep);text-align:center;}

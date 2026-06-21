@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
+import MonthCalendar from './components/MonthCalendar';
 
 const LogoMark = () => (
   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#A84B41" strokeWidth="2.2">
@@ -21,6 +22,7 @@ function fmtTime(t) {
 export default function HomePage() {
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedDay, setSelectedDay] = useState(null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [selected, setSelected] = useState(null);
   const [form, setForm] = useState({ full_name: '', phone: '', email: '' });
@@ -109,9 +111,14 @@ export default function HomePage() {
         </div>
       </div>
 
+      <MonthCalendar classes={classes} onSelectDay={setSelectedDay} />
+
       <div className="section" id="planning">
         <div className="section-head">
           <h2>Planning</h2>
+          {selectedDay && (
+            <a href="#" onClick={(e) => { e.preventDefault(); setSelectedDay(null); }}>Voir tout</a>
+          )}
         </div>
 
         {loading && <div className="empty-state">Chargement du planning…</div>}
@@ -119,7 +126,7 @@ export default function HomePage() {
           <div className="empty-state">Aucun cours programmé pour le moment. Reviens bientôt !</div>
         )}
 
-        {classes.map((c) => {
+        {classes.filter((c) => !selectedDay || c.class_date === selectedDay).map((c) => {
           const full = c.places <= 0;
           let tag;
           if (full) tag = <span className="tag">Complet</span>;
