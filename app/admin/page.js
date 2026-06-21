@@ -131,6 +131,22 @@ export default function AdminPage() {
     loadClasses();
   }
 
+  async function deleteBooking(id) {
+    if (!confirm('Supprimer cette réservation ?')) return;
+    const booking = bookings.find((b) => b.id === id);
+    await supabase.from('bookings').delete().eq('id', id);
+    setBookings((prev) => prev.filter((b) => b.id !== id));
+
+    if (booking?.status === 'confirme' && booking?.class_id) {
+      const cls = classes.find((c) => c.id === booking.class_id);
+      if (cls) {
+        const newPlaces = cls.places + 1;
+        await supabase.from('classes').update({ places: newPlaces }).eq('id', booking.class_id);
+        setClasses((prev) => prev.map((c) => c.id === booking.class_id ? { ...c, places: newPlaces } : c));
+      }
+    }
+  }
+
   async function updateBookingStatus(id, status) {
     const booking = bookings.find((b) => b.id === id);
     const prevStatus = booking?.status || 'nouveau';
@@ -262,6 +278,7 @@ export default function AdminPage() {
               <option value="acompte">acompte payé</option>
               <option value="confirme">confirmé</option>
             </select>
+            <button className="del-btn" onClick={() => deleteBooking(b.id)}>✕</button>
           </div>
         ))}
       </div>
