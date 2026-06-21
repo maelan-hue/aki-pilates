@@ -26,10 +26,13 @@ export default function AdminPage() {
 
   const [classes, setClasses] = useState([]);
   const [bookings, setBookings] = useState([]);
+  const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState({
     class_date: '', time: '09:00', name: '', description: '',
     duration: 45, price: 10, places: 5, is_formule: false,
   });
+
+  const EMPTY_FORM = { class_date: '', time: '09:00', name: '', description: '', duration: 45, price: 10, places: 5, is_formule: false };
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => setSession(data.session));
@@ -67,6 +70,17 @@ export default function AdminPage() {
     await supabase.auth.signOut();
   }
 
+  function startEdit(c) {
+    setEditingId(c.id);
+    setForm({ class_date: c.class_date, time: c.time, name: c.name, description: c.description, duration: c.duration, price: c.price, places: c.places, is_formule: c.is_formule });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function cancelEdit() {
+    setEditingId(null);
+    setForm(EMPTY_FORM);
+  }
+
   async function addClass() {
     if (!form.name.trim() || !form.class_date) {
       alert('Indique au moins une date et un nom de cours.');
@@ -84,13 +98,36 @@ export default function AdminPage() {
       is_formule: form.name.toLowerCase().includes('petit-d'),
     });
     if (error) { alert("Erreur lors de l'ajout : " + error.message); return; }
-    setForm({ ...form, name: '', description: '' });
+    setForm(EMPTY_FORM);
+    loadClasses();
+  }
+
+  async function saveEdit() {
+    if (!form.name.trim() || !form.class_date) {
+      alert('Indique au moins une date et un nom de cours.');
+      return;
+    }
+    const { error } = await supabase.from('classes').update({
+      class_date: form.class_date,
+      day_label: dayLabel(form.class_date),
+      time: form.time,
+      name: form.name.trim(),
+      description: form.description.trim() || 'Studio Villelongue',
+      duration: Number(form.duration) || 45,
+      price: Number(form.price) || 10,
+      places: Number(form.places) || 0,
+      is_formule: form.name.toLowerCase().includes('petit-d'),
+    }).eq('id', editingId);
+    if (error) { alert('Erreur lors de la modification : ' + error.message); return; }
+    setEditingId(null);
+    setForm(EMPTY_FORM);
     loadClasses();
   }
 
   async function deleteClass(id) {
     if (!confirm('Supprimer ce cours du planning ?')) return;
     await supabase.from('classes').delete().eq('id', id);
+    if (editingId === id) cancelEdit();
     loadClasses();
   }
 
@@ -137,7 +174,7 @@ export default function AdminPage() {
       </div>
 
       <div className="admin-form">
-        <h3>Ajouter un cours</h3>
+        <h3>{editingId ? 'Modifier le cours' : 'Ajouter un cours'}</h3>
         <div className="row2">
           <div className="field"><label>Date</label>
             <input type="date" value={form.class_date} onChange={(e) => setForm({ ...form, class_date: e.target.value })} />
@@ -163,20 +200,28 @@ export default function AdminPage() {
         <div className="field"><label>Places disponibles</label>
           <input type="number" value={form.places} onChange={(e) => setForm({ ...form, places: e.target.value })} />
         </div>
-        <button className="add-btn" onClick={addClass}>+ Ajouter au planning</button>
+        {editingId ? (
+          <div className="edit-actions">
+            <button className="add-btn" onClick={saveEdit}>Enregistrer</button>
+            <button className="cancel-btn" onClick={cancelEdit}>Annuler</button>
+          </div>
+        ) : (
+          <button className="add-btn" onClick={addClass}>+ Ajouter au planning</button>
+        )}
       </div>
 
       <div className="admin-list">
         <h3>Cours programmés</h3>
         {classes.length === 0 && <div className="empty-state">Tu n'as encore ajouté aucun cours.</div>}
         {classes.map((c) => (
-          <div className="admin-item" key={c.id}>
+          <div className={`admin-item${editingId === c.id ? ' admin-item--editing' : ''}`} key={c.id}>
             <div className="ai-time">{fmtTime(c.time)}</div>
             <div className="ai-info">
               <b>{c.name}</b>
               <span>{c.day_label} · {c.duration} min · {c.places} places</span>
             </div>
             <div className="ai-price">{c.price}€</div>
+            <button className="edit-btn" onClick={() => startEdit(c)}>✎</button>
             <button className="del-btn" onClick={() => deleteClass(c.id)}>✕</button>
           </div>
         ))}

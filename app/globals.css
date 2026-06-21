@@ -166,6 +166,10 @@
   .admin-item .ai-info span{font-size:11px;color:var(--ink-soft);}
   .admin-item .ai-price{font-size:12.5px;color:var(--sage-deep);font-family:'Fraunces',serif;}
   .del-btn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--stone);border:none;color:var(--clay-deep);font-size:13px;cursor:pointer;}
+  .edit-btn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--stone);border:none;color:var(--sage-deep);font-size:14px;cursor:pointer;}
+  .admin-item--editing{border-color:var(--sage-deep);background:#f7f2ec;}
+  .edit-actions{display:flex;gap:10px;}
+  .cancel-btn{flex:1;padding:13px;border-radius:12px;border:1px solid var(--line);background:transparent;font-family:'Jost',sans-serif;font-size:13.5px;color:var(--ink-soft);cursor:pointer;}
   .empty-state{font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px 0;}
   .status-select{flex:0 0 auto;border:none;border-radius:999px;padding:5px 10px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;cursor:pointer;outline:none;appearance:none;text-align:center;}
   .status-nouveau{background:#F0E8DC;color:#7A6A56;}
