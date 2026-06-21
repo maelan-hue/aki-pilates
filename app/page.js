@@ -178,7 +178,7 @@ export default function HomePage() {
         </div>
         <div className="step">
           <div className="step-num">4</div>
-          <div className="step-txt"><h4>C'est confirmé</h4><p>Ta place est validée dès réception de l'acompte.</p></div>
+          <div className="step-txt"><h4>C'est confirmé</h4><p>Ta place est validée dès réception de l'acompte. En dessous de 4 participants, le cours ne peut pas être assuré et l'acompte est intégralement remboursé.</p></div>
         </div>
       </div>
 
@@ -246,6 +246,7 @@ export default function HomePage() {
                 <div className="reste">
                   <b>Et maintenant ?</b> Āki te recontacte sous peu pour confirmer ta place et t'envoyer un lien de paiement pour régler l'acompte.
                 </div>
+                <div className="sheet-mention">* En dessous de 4 participants, le cours ne peut pas être assuré. L'acompte sera intégralement remboursé.</div>
               </div>
             )}
           </div>
