@@ -233,6 +233,7 @@ export default function HomePage() {
                   {step === 'sending' ? 'Envoi…' : 'Envoyer ma demande de réservation'}
                 </button>
                 <div className="secure">📩 Āki te répond rapidement, par SMS ou email</div>
+                <div className="sheet-mention">* En dessous de 4 participants, le cours ne peut pas être assuré. L'acompte sera intégralement remboursé.</div>
               </div>
             ) : (
               <div className="confirm">

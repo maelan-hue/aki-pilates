@@ -130,6 +130,7 @@
 
   .pay-btn{width:100%;background:var(--ink);color:var(--cream);border:none;border-radius:999px;padding:15px;font-family:'Jost';font-size:14px;letter-spacing:0.02em;cursor:pointer;margin-top:6px;}
   .secure{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;font-size:10.5px;color:var(--ink-soft);}
+  .sheet-mention{margin-top:12px;font-size:10px;color:var(--ink-soft);line-height:1.5;text-align:center;padding:0 4px;}
 
   /* confirmation */
   .confirm{text-align:center;padding:20px 0 6px;}
