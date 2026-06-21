@@ -88,7 +88,7 @@ export default function HomePage() {
         <div className="breath"><span>respire</span></div>
         <h1>Prends ton <em>cours</em>,<br />en pleine conscience.</h1>
         <p className="lead">Choisis ton créneau et réserve ta place en 2 minutes.</p>
-        <button className="hero-cta" onClick={() => document.getElementById('planning').scrollIntoView({ behavior: 'smooth' })}>
+        <button className="hero-cta" onClick={() => document.querySelector('.mcal').scrollIntoView({ behavior: 'smooth' })}>
           Voir le planning →
         </button>
       </div>
@@ -181,7 +181,7 @@ export default function HomePage() {
 
       <div className="footer">
         <div className="brand-mark" style={{ margin: '0 auto 10px' }}><LogoMark /></div>
-        <p>Āki Pilates · Villelongue-de-la-Salanque</p>
+        <p>Āki Pilates</p>
         <p className="ig">@pilates.aki</p>
       </div>
 
