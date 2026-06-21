@@ -157,6 +157,7 @@
   .admin-form h3{font-size:14px;margin-bottom:12px;}
   .field select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:10px;font-family:'Jost';font-size:14px;background:var(--cream);color:var(--ink);}
   .add-btn{width:100%;background:var(--sage-deep);color:var(--cream);border:none;border-radius:999px;padding:13px;font-family:'Jost';font-size:13.5px;cursor:pointer;margin-top:4px;}
+  .formule-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-soft);cursor:pointer;margin-bottom:12px;}
 
   .admin-list{margin:0 22px 30px;}
   .admin-list h3{font-size:14px;margin-bottom:12px;}

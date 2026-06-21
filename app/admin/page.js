@@ -95,7 +95,7 @@ export default function AdminPage() {
       duration: Number(form.duration) || 45,
       price: Number(form.price) || 10,
       places: Number(form.places) || 0,
-      is_formule: form.name.toLowerCase().includes('petit-d'),
+      is_formule: form.is_formule,
     });
     if (error) { alert("Erreur lors de l'ajout : " + error.message); return; }
     setForm(EMPTY_FORM);
@@ -116,7 +116,7 @@ export default function AdminPage() {
       duration: Number(form.duration) || 45,
       price: Number(form.price) || 10,
       places: Number(form.places) || 0,
-      is_formule: form.name.toLowerCase().includes('petit-d'),
+      is_formule: form.is_formule,
     }).eq('id', editingId);
     if (error) { alert('Erreur lors de la modification : ' + error.message); return; }
     setEditingId(null);
@@ -233,6 +233,10 @@ export default function AdminPage() {
         <div className="field"><label>Places disponibles</label>
           <input type="number" value={form.places} onChange={(e) => setForm({ ...form, places: e.target.value })} />
         </div>
+        <label className="formule-check">
+          <input type="checkbox" checked={form.is_formule} onChange={(e) => setForm({ ...form, is_formule: e.target.checked })} />
+          Formule petit-déj
+        </label>
         {editingId ? (
           <div className="edit-actions">
             <button className="add-btn" onClick={saveEdit}>Enregistrer</button>
