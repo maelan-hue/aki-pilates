@@ -94,6 +94,11 @@ export default function AdminPage() {
     loadClasses();
   }
 
+  async function updateBookingStatus(id, status) {
+    await supabase.from('bookings').update({ status }).eq('id', id);
+    setBookings((prev) => prev.map((b) => b.id === id ? { ...b, status } : b));
+  }
+
   // ---------- RENDER ----------
 
   if (session === undefined) {
@@ -186,6 +191,15 @@ export default function AdminPage() {
               <b>{b.full_name}</b>
               <span>{b.classes?.name} · {b.classes?.day_label} {fmtTime(b.classes?.time)} · {b.phone}{b.email ? ' · ' + b.email : ''}</span>
             </div>
+            <select
+              className={`status-select status-${b.status || 'nouveau'}`}
+              value={b.status || 'nouveau'}
+              onChange={(e) => updateBookingStatus(b.id, e.target.value)}
+            >
+              <option value="nouveau">en attente</option>
+              <option value="acompte">acompte payé</option>
+              <option value="confirme">confirmé</option>
+            </select>
           </div>
         ))}
       </div>

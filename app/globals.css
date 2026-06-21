@@ -167,6 +167,10 @@
   .admin-item .ai-price{font-size:12.5px;color:var(--sage-deep);font-family:'Fraunces',serif;}
   .del-btn{flex:0 0 auto;width:30px;height:30px;border-radius:50%;background:var(--stone);border:none;color:var(--clay-deep);font-size:13px;cursor:pointer;}
   .empty-state{font-size:12.5px;color:var(--ink-soft);text-align:center;padding:20px 0;}
+  .status-select{flex:0 0 auto;border:none;border-radius:999px;padding:5px 10px;font-family:'Jost',sans-serif;font-size:11px;font-weight:500;cursor:pointer;outline:none;appearance:none;text-align:center;}
+  .status-nouveau{background:#F0E8DC;color:#7A6A56;}
+  .status-acompte{background:#E8F0DC;color:#4A7A2A;}
+  .status-confirme{background:#DCF0E8;color:#2A7A5A;}
 
 html{margin:0;padding:0;}
 a{color:inherit;}
